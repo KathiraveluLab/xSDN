@@ -1,0 +1,26 @@
+/*
+ * Title:        xSDN
+ * Description:  An Extended Platform for Software-Defined Networking.
+ * Licence:      Eclipse Public License - v 1.0 - https://www.eclipse.org/legal/epl-v10.html
+ *
+ * Copyright (c) 2014, Pradeeban Kathiravelu <pradeeban.kathiravelu@tecnico.ulisboa.pt>
+ */
+package pt.inesc_id.gsd.ravana.constants;
+
+/**
+ * Common constants used in Ravana.
+ */
+public class RavanaConstants {
+
+
+    /**
+     * Values to represent the intent.
+     */
+    public static class IntentQuotient {
+        public static int MAXIMIZE = 1;
+
+        public static int MINIMIZE = -1;
+
+        public static int DONT_CARE = 0;
+    }
+}

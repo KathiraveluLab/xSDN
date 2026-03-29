@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Title:        xSDN
+  ~ Description:  An Extended Platform for Software-Defined Networking.
+  ~ Licence:      Eclipse Public License - v 1.0 - https://www.eclipse.org/legal/epl-v10.html
+  ~
+  ~ Copyright (c) 2014, Pradeeban Kathiravelu <pradeeban.kathiravelu@tecnico.ulisboa.pt>
+  -->
+
+<infinispan>
+    <jgroups>
+        <stack-file name="external-file" path="conf/default-jgroups-udp.xml"/>
+    </jgroups>
+    <cache-container default-cache="replicatedCache">
+        <transport stack="external-file" />
+        <replicated-cache name="replicatedCache"/>
+    </cache-container>
+</infinispan>

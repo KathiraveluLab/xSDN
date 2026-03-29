@@ -1,0 +1,17 @@
+Copy the files to the other instances.
+----------------------------------------
+$ scp -r . pradeeban@146.193.41.145:/home/pradeeban
+or just,
+$ scp gsd-1.0-SNAPSHOT.jar pradeeban@146.193.41.145:/home/pradeeban
+and
+$ scp -r conf pradeeban@146.193.41.145:/home/pradeeban/
+
+
+Test environment
+-------------------
+146.193.41.141  ginja-a1
+146.193.41.142  ginja-a2
+146.193.41.143  ginja-a3
+146.193.41.144  ginja-a4
+146.193.41.145  ginja-a5
+146.193.41.146  ginja-a6 - default.

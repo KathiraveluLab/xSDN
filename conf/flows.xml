@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<flows>
+    <flow id="F1">
+        <!--Denotes the starting time, in seconds-->
+        <start>0</start>
+        <!--Chunks start transmission when the previous chunks are completely transmitted from their origin-->
+        <chunks>1.2,34,234,453,44,33</chunks>
+        <origin>GSD15</origin>
+        <destination>GSD1</destination>
+    </flow>
+    <flow id="F2">
+        <start>100</start>
+        <!--Numerals appended with D denote time gaps between the start transmission time of chunks-->
+        <chunks>100,30.1D,334,24,203D,3,303D,4334,3, 199, 300</chunks>
+        <origin>GSD1</origin>
+        <destination>GSD10</destination>
+    </flow>
+    <flow id="F3">
+        <start>200</start>
+        <!--Numerals appended with G denote time gaps between any two transmissions. This time gap starts from the
+        completion of the transfer of previous, where D starts the interval since the previous chunk transmission
+        is fired.-->
+        <chunks>100,300.1G,334,24,203G,3,303G,4334,3, 199, 300</chunks>
+        <origin>GSD1</origin>
+        <destination>GSD10</destination>
+    </flow>
+    <flow id="F4">
+        <start>300</start>
+        <!--similar to, <chunks>4.4,4.4,4.4,4.4,4.4,4.4,4.4,4.4,4.4,4.4,4.4,4.4,4.4,4.4,4.4</chunks>-->
+        <chunks>4.4*15</chunks>
+        <origin>GSD1</origin>
+        <destination>GSD10</destination>
+    </flow>
+    <flow id="F5">
+        <start>400</start>
+        <!--Initializes flow of 40 size with 200 units of time gap between their start time-->
+        <chunks>40.1+200.1D*100</chunks>
+        <origin>GSD3</origin>
+        <destination>GSD12</destination>
+    </flow>
+    <flow id="F6">
+        <start>500</start>
+        <!--Initializes flow of 40 size with 200 units of time gap between their transmissions-->
+        <chunks>40+200G*100</chunks>
+        <origin>GSD10</origin>
+        <destination>GSD14</destination>
+    </flow>
+    <flow id="F7">
+        <start>600</start>
+        <!--R denotes a chunk of random size-->
+        <chunks>R+200G*100</chunks>
+        <origin>GSD7</origin>
+        <destination>GSD13</destination>
+    </flow>
+    <flow id="F8">
+        <start>700</start>
+        <!--Divides the total size of the flow (10000, in this case) into (20, in this case) random sized chunks.
+        Each chunk can have gap between as shown below.-->
+        <chunks>10000.1/20+200G</chunks>
+        <origin>GSD9</origin>
+        <destination>GSD12</destination>
+    </flow>
+    <flow id="F9">
+        <start>800</start>
+        <!--A combination of all above cases in a single flow-->
+        <chunks>R,40+200G*100,300,400,300D,300,400,300G,40+200D*100</chunks>
+        <origin>GSD13</origin>
+        <destination>GSD5</destination>
+    </flow>
+    <flow id="F10">
+        <start>900</start>
+        <!--Random of size, 10 - 1000-->
+        <chunks>10R1000+200G*100</chunks>
+        <origin>GSD11</origin>
+        <destination>GSD1</destination>
+    </flow>
+    <flow id="F11">
+        <start>1000</start>
+        <!--Identical to F1-->
+        <chunks>G,12.1,34,234,453,44,33</chunks>
+        <origin>GSD15</origin>
+        <destination>GSD1</destination>
+    </flow>
+    <flow id="F12">
+        <start>1100</start>
+        <!--Identical to F1, except all nodes start at once-->
+        <chunks>D,12,34,234,453,44,33</chunks>
+        <origin>GSD15</origin>
+        <destination>GSD1</destination>
+    </flow>
+    <flow id="F13">
+        <start>1200</start>
+        <!--similar to, F4 with random values-->
+        <chunks>R*15</chunks>
+        <origin>GSD1</origin>
+        <destination>GSD10</destination>
+    </flow>
+    <flow id="F14">
+        <start>1300</start>
+        <!--A combination of all above cases in a single flow-->
+        <chunks>20000.1/100,300,400,300D,300,400,300G,40+200D*100</chunks>
+        <origin>GSD13</origin>
+        <destination>GSD5</destination>
+    </flow>
+    <flow id="F15">
+        <start>1400</start>
+        <!--A combination of all above cases in a single flow-->
+        <chunks>10.1R1000.1,40+200G*100,300,400,300D,300,400,300G,40+200D*100</chunks>
+        <origin>GSD13</origin>
+        <destination>GSD5</destination>
+    </flow>
+    <flow id="F16">
+        <start>1500</start>
+        <!--A combination of all above cases in a single flow-->
+        <chunks>10.1R1000.1*100,300,400,300D,300,400,300G,40+200D*100</chunks>
+        <origin>GSD13</origin>
+        <destination>GSD5</destination>
+    </flow>
+</flows>

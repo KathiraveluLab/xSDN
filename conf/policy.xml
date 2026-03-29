@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<policies>
+    <policy profile="time"><priority>1</priority></policy>
+    <!--policy profile="energy"><priority>2</priority></policy-->
+</policies>

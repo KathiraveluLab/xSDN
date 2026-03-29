@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<flows>
+    <flow id="IF1">
+        <origin>GSD15</origin>
+        <destination>GSD1</destination>
+    </flow>
+    <flow id="IF2">
+        <origin>GSD1</origin>
+        <destination>GSD10</destination>
+    </flow>
+    <flow id="IF3">
+        <origin>GSD3</origin>
+        <destination>GSD12</destination>
+    </flow>
+    <flow id="IF4">
+        <origin>GSD10</origin>
+        <destination>GSD14</destination>
+    </flow>
+    <flow id="IF5">
+        <origin>GSD7</origin>
+        <destination>GSD13</destination>
+    </flow>
+    <flow id="IF6">
+        <origin>GSD9</origin>
+        <destination>GSD12</destination>
+    </flow>
+    <flow id="IF7">
+        <origin>GSD13</origin>
+        <destination>GSD5</destination>
+    </flow>
+    <flow id="IF8">
+        <origin>GSD11</origin>
+        <destination>GSD1</destination>
+    </flow>
+</flows>
