@@ -10,7 +10,7 @@ package pt.inesc_id.gsd.ravana.flow;
 /**
  * Abstract Flow representation
  */
-public abstract class Flow {
+public abstract class Flow implements java.io.Serializable {
     protected double startTime;
     protected String origin;
     protected String destination;

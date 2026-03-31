@@ -24,6 +24,8 @@ public class XSDNCore {
     protected static Map<String, XSDNNode> xSDNNodes = new HashMap<>();
     protected static Map<String, XSDNFlow> xSDNFlows = new HashMap<>();
     protected static Map<String, XSDNPolicy> xSDNPolicies = new HashMap<>();
+    // Singleton or map wrapper instance via the simulated Infinispan KnowledgeBase cache
+    protected static Map<String, pt.inesc_id.gsd.ravana.statistics.FlowStatistics> knowledgeBase = pt.inesc_id.gsd.ravana.statistics.KnowledgeBase.getAllStatistics();
 
     private static XSDNCore instance = null;
 
@@ -71,6 +73,10 @@ public class XSDNCore {
 
     public static Map<String, XSDNFlow> getXSDNFlows() {
         return xSDNFlows;
+    }
+
+    public static Map<String, pt.inesc_id.gsd.ravana.statistics.FlowStatistics> getKnowledgeBase() {
+        return knowledgeBase;
     }
 
     public static Map<String, XSDNPolicy> getxSDNPolicies() {

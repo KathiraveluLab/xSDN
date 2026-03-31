@@ -69,4 +69,43 @@ public class XSDNEngine {
         msg += "Entries in the policies map: " + XSDNCore.getxSDNPolicies().size() + "\n";
         return msg;
     }
+
+    /**
+     * Executes the simulation routing pipeline (Algorithm 1) for all defined network flows.
+     * @param routingAlgorithm the routing logic to apply (e.g., AdaptiveRoute, RandomRoute)
+     */
+    public static void executeSimulations(String routingAlgorithm) {
+        boolean simulationIsExecuting = true;
+
+        while (simulationIsExecuting) {
+            boolean anyIncomplete = false;
+
+            for (String flowId : XSDNCore.getXSDNFlows().keySet()) {
+                pt.inesc_id.gsd.ravana.flow.XSDNFlow flow = XSDNCore.getXSDNFlows().get(flowId);
+
+                if (!flow.isCompleted()) {
+                    anyIncomplete = true;
+                    if (routingAlgorithm.equalsIgnoreCase("RandomRoute")) {
+                        pt.inesc_id.gsd.ravana.algorithms.RandomRoute.route(flowId);
+                    } else if (routingAlgorithm.equalsIgnoreCase("AdaptiveRoute")) {
+                        pt.inesc_id.gsd.ravana.algorithms.AdaptiveRoute.route(flowId);
+                    } else {
+                        logger.warn("Routing algorithm " + routingAlgorithm + " not recognized in execution loop.");
+                    }
+                }
+            }
+            if (!anyIncomplete) {
+                simulationIsExecuting = false;
+            }
+        }
+        presentSummarizedOutcomes();
+    }
+
+    /**
+     * Reports conclusive outcome metrics after simulation pipeline termination.
+     */
+    public static void presentSummarizedOutcomes() {
+        logger.info("Simulation Execution Completed.");
+        logger.info("Total KnowledgeBase statistics gathered natively: " + XSDNCore.getKnowledgeBase().size());
+    }
 }

@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Policy for XSDN
  */
-public class XSDNPolicy {
+public class XSDNPolicy implements java.io.Serializable {
     private Map<String, String> policyMap = new HashMap<>();
 
     public void addPolicy(String key, String value) {

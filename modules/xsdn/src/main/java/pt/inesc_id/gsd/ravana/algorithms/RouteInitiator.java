@@ -25,6 +25,14 @@ public class RouteInitiator extends XSDNCore {
     private static Logger logger = LogManager.getLogger(RouteInitiator.class.getName());
     protected static final Set<String> flows = getXSDNFlows().keySet();
 
+    public static void initInfinispan() {
+        try {
+            pt.inesc_id.gsd.ravana.infinispan.InfCore infiniCore = pt.inesc_id.gsd.ravana.infinispan.InfCore.getInfiniCore();
+            possibleRoutes = infiniCore.getRoutesCache();
+        } catch (Exception e) {
+            System.err.println("Could not initialize Infinispan for RouteInitiator: " + e.getMessage());
+        }
+    }
 
     /**
      * Random Walk the flow from the origin to destination

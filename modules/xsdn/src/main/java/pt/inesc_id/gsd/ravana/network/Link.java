@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * The class representing Link
  */
-public class Link {
+public class Link implements java.io.Serializable {
     private String currentNode;
     private String nextNode;
     private Double propertyValue;

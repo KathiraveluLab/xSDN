@@ -23,6 +23,21 @@ public class InfCore {
 
     private static InfCore infiniCore = null;
     protected static Cache<String, String> defaultCache;
+    protected static Cache<String, pt.inesc_id.gsd.ravana.statistics.FlowStatistics> statisticsCache;
+
+    protected static Cache<String, pt.inesc_id.gsd.ravana.network.XSDNNode> nodesCache;
+    protected static Cache<String, pt.inesc_id.gsd.ravana.flow.XSDNFlow> flowsCache;
+    protected static Cache<String, pt.inesc_id.gsd.ravana.policy.XSDNPolicy> policiesCache;
+    protected static Cache<java.lang.String, java.util.List<java.lang.String>> routesCache;
+
+    public Cache<String, pt.inesc_id.gsd.ravana.network.XSDNNode> getNodesCache() { return nodesCache; }
+    public Cache<String, pt.inesc_id.gsd.ravana.flow.XSDNFlow> getFlowsCache() { return flowsCache; }
+    public Cache<String, pt.inesc_id.gsd.ravana.policy.XSDNPolicy> getPoliciesCache() { return policiesCache; }
+    public Cache<java.lang.String, java.util.List<java.lang.String>> getRoutesCache() { return routesCache; }
+
+    public Cache<String, pt.inesc_id.gsd.ravana.statistics.FlowStatistics> getStatisticsCache() {
+        return statisticsCache;
+    }
 
     public Cache<String, String> getDefaultCache() {
         return defaultCache;
@@ -36,6 +51,11 @@ public class InfCore {
     protected InfCore() throws IOException {
         DefaultCacheManager manager = new DefaultCacheManager(InfinispanConstants.INFINISPAN_CONFIG_FILE);
         defaultCache = manager.getCache(InfinispanConstants.TRANSACTIONAL_CACHE);
+        statisticsCache = manager.getCache("statistics");
+        nodesCache = manager.getCache("nodes");
+        flowsCache = manager.getCache("flows");
+        policiesCache = manager.getCache("policies");
+        routesCache = manager.getCache("routes");
     }
 
     /**

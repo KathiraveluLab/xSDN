@@ -123,7 +123,7 @@ public class XSDNFlow extends Flow {
         numberOfChunks = chunks.size();
         double totalTime = 0;
         double reachTime;
-        if (routingAlgorithm.equalsIgnoreCase("RandomRoute")) {
+        if (routingAlgorithm.equalsIgnoreCase("RandomRoute") || routingAlgorithm.equalsIgnoreCase("AdaptiveRoute")) {
             if (!isWaitStrictlyOrdered) {
                 for (int i = 1; i < chunks.size(); i++) {
                     double igniteTime = chunks.get(i - 1).getStartTime();

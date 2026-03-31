@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * Representing the building block of the flows.
  */
-public class Chunk extends XSDNCore {
+public class Chunk extends XSDNCore implements java.io.Serializable {
     private static Logger logger = LogManager.getLogger(Chunk.class.getName());
 
     private double size;

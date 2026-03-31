@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * Represents the characteristics of a XSDN node.
  */
-public class XSDNNode {
+public class XSDNNode implements java.io.Serializable {
     private static Logger logger = LogManager.getLogger(XSDNNode.class.getName());
 
     private Map<String, Map<String, Double>> primaryNextMap = new HashMap<>();
