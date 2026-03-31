@@ -32,6 +32,16 @@ Respective Executors are found in the package, "main".
 Make sure to include conf/log4j2-test.xml into your class path to be able to configure and view the logs. Default log level is [WARN].
 
 
+## OpenDaylight (ODL) Integration
+
+xSDN provides the core simulation and adaptive routing engine. For real-world emulation with OpenDaylight and Mininet, see **[SENDIM](https://github.com/KathiraveluLab/SENDIM)** — a framework built on top of xSDN that bridges the xSDN engine to the OpenDaylight northbound API, enabling fully emulated SDN environments.
+
+
+## Future Work
+
+- **Real-time Web Dashboard**: A lightweight HTML/JS dashboard that polls the `KnowledgeBase` to visualize live network topology and animate flow heatmaps, providing a richer experience than terminal-only output.
+
+
 ## Citing xSDN
 
 If you use xSDN in your research, please cite the below paper:
