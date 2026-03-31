@@ -25,7 +25,27 @@ mv xsdn-1.0-SNAPSHOT/jars/xsdn-1.0-SNAPSHOT.jar .
 ```
 
 ## Executing
-Respective Executors are found in the package, "main".
+
+Executors are found in the `main` package. Run with `mvn exec:java` using the following CLI system properties:
+
+| Property | Values | Default | Description |
+|----------|--------|---------|-------------|
+| `-Dalgo` | `RandomRoute`, `AdaptiveRoute` | `RandomRoute` | Routing algorithm |
+| `-Dconf` | path to a directory | `conf` | Configuration directory (XML files) |
+| `-Dhealth` | `true`, `false` | `false` | Enable HealthMonitor telemetry output |
+
+```bash
+# Default run (RandomRoute, conf/, no health monitoring)
+mvn exec:java -pl modules/xsdn -Dexec.mainClass="pt.inesc_id.gsd.ravana.main.XSDNExecutor"
+
+# Adaptive routing with health monitoring
+mvn exec:java -pl modules/xsdn -Dexec.mainClass="pt.inesc_id.gsd.ravana.main.XSDNExecutor" \
+    -Dalgo=AdaptiveRoute -Dhealth=true
+
+# Benchmark run on a generated caveman topology
+mvn exec:java -pl modules/xsdn -Dexec.mainClass="pt.inesc_id.gsd.ravana.main.XSDNExecutor" \
+    -Dalgo=AdaptiveRoute -Dconf=conf/benchmarking -Dhealth=true
+```
 
 
 ## Logging
