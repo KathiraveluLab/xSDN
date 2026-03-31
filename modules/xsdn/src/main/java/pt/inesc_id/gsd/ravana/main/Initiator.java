@@ -105,6 +105,9 @@ public class Initiator {
     private static void returnHealthMonitoringOutput() {
         if (isHealthMonitoringEnabled) {
             HealthMonitor.printHealthLogs();
+            System.out.println("--- BENCHMARK TELEMETRY ---");
+            System.out.println(HealthMonitor.getHealthLogs());
+            System.out.println("---------------------------");
         }
     }
 
@@ -112,6 +115,7 @@ public class Initiator {
         if (isHealthMonitoringEnabled) {
             HealthMonitor.setWaitTimeInMillis(waitTimeInMillis);
             Thread t = new Thread(new HealthMonitor());
+            t.setDaemon(true);
             t.start();
         }
     }

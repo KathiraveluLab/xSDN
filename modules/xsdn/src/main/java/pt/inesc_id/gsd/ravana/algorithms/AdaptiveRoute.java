@@ -24,7 +24,7 @@ public class AdaptiveRoute extends RouteInitiator {
         pt.inesc_id.gsd.ravana.flow.XSDNFlow flow = xSDNFlows.get(flowId);
         String origin = flow.getOrigin();
         String destination = flow.getDestination();
-        String key = getKey(flowId);
+        String key = origin + " " + destination;
         List<String> routes = possibleRoutes.get(key);
 
         // SLA Intent Analysis
@@ -89,17 +89,32 @@ public class AdaptiveRoute extends RouteInitiator {
         stats.addProperty("energy", flow.getTotalProperty("energy"));
         stats.addProperty("cost", flow.getTotalProperty("cost"));
         
-        // Record speed as average speed across chunks if needed, 
-        // or just use the speed of the first link of the first chunk as a proxy
-        double totalSpeed = 0;
+        // Record speed as average speed across chunks and distributions using MathUtils
         int chunkCount = flow.getChunks().size();
+        double[] chunkTimes = new double[chunkCount];
+        double[] chunkSpeeds = new double[chunkCount];
+
+        int i = 0;
+        double totalSpeed = 0;
         for (pt.inesc_id.gsd.ravana.flow.Chunk c : flow.getChunks().values()) {
-            String[] r = c.getDesignatedRoute();
-            if (r != null && r.length > 1) {
-                totalSpeed += XSDNCore.getSpeedOfLink(r[0], r[1]);
-            }
+            double cTime = c.getTimeWhenReachingDestination() - c.getStartTime();
+            chunkTimes[i] = cTime;
+            double speed = cTime > 0 ? (c.getSize() / cTime) : 0;
+            chunkSpeeds[i] = speed;
+            totalSpeed += speed;
+            i++;
         }
+        
         stats.addProperty("speed", chunkCount > 0 ? totalSpeed / chunkCount : 0);
+        
+        // Statistical Distributions
+        stats.addProperty("time_variance", pt.inesc_id.gsd.ravana.util.MathUtils.getVariance(chunkTimes));
+        stats.addProperty("time_stddev", pt.inesc_id.gsd.ravana.util.MathUtils.getStdDev(chunkTimes));
+        stats.addProperty("time_p95", pt.inesc_id.gsd.ravana.util.MathUtils.getPercentile(chunkTimes, 95.0));
+
+        stats.addProperty("speed_variance", pt.inesc_id.gsd.ravana.util.MathUtils.getVariance(chunkSpeeds));
+        stats.addProperty("speed_stddev", pt.inesc_id.gsd.ravana.util.MathUtils.getStdDev(chunkSpeeds));
+        stats.addProperty("speed_p95", pt.inesc_id.gsd.ravana.util.MathUtils.getPercentile(chunkSpeeds, 95.0));
 
         pt.inesc_id.gsd.ravana.statistics.KnowledgeBase.addFlowStatistics(flowId, stats);
         

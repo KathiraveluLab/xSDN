@@ -45,8 +45,12 @@ public class CyclesTruncatedRandomWalk extends RandomWalk {
         List<String> nodesTraversed = new ArrayList<>();
         nodesTraversed.add(current);
 
-        while (!current.equalsIgnoreCase(destination)) {
+        int maxHops = 1000;
+        int hops = 0;
+
+        while (!current.equalsIgnoreCase(destination) && hops < maxHops) {
             current = getNextNode(current);
+            hops++;
             if (nodesTraversed.contains(current)) {
                 // truncate the cycle
                 nodesTraversed = nodesTraversed.subList(0, nodesTraversed.indexOf(current) + 1);
@@ -72,9 +76,13 @@ public class CyclesTruncatedRandomWalk extends RandomWalk {
         Link link;
         List<Link> linksTraversed = new ArrayList<>();
 
-        while (!current.equalsIgnoreCase(destination)) {
+        int maxHops = 1000;
+        int hops = 0;
+
+        while (!current.equalsIgnoreCase(destination) && hops < maxHops) {
             link = getNextNodeWithProperty(current, propertyName);
             current = link.getNextNode();
+            hops++;
 
             if (nodesTraversed.contains(current)) {
                 // truncate the cycle
@@ -86,7 +94,6 @@ public class CyclesTruncatedRandomWalk extends RandomWalk {
                 linksTraversed.add(link);
             }
             current = link.getNextNode();
-
         }
         return linksTraversed;
     }
@@ -134,9 +141,13 @@ public class CyclesTruncatedRandomWalk extends RandomWalk {
         Link link;
         List<Link> linksTraversed = new ArrayList<>();
 
-        while (!current.equalsIgnoreCase(destination)) {
+        int maxHops = 1000;
+        int hops = 0;
+
+        while (!current.equalsIgnoreCase(destination) && hops < maxHops) {
             link = getNextNodeWithProperties(current);
             current = getNextNode(current);
+            hops++;
 
             if (nodesTraversed.contains(current)) {
                 // truncate the cycle

@@ -23,8 +23,8 @@ public class XSDNExecutor {
 //        Initiator.infInitAndExecute(10);
 //        Initiator.infExecute();
 
-//        Initiator.setIsHealthMonitoringEnabled(true);
-//        Initiator.setWaitTimeInMillis(1000);
+        Initiator.setIsHealthMonitoringEnabled(true);
+        Initiator.setWaitTimeInMillis(1000);
 
 //        Initiator.initiate(10);
 //        Initiator.initiateRouteList(10);

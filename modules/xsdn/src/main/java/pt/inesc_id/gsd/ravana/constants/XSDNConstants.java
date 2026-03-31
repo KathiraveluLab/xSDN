@@ -12,14 +12,13 @@ package pt.inesc_id.gsd.ravana.constants;
  */
 public class XSDNConstants {
     /*"conf" for real configurations. "experiments" for more experiments.*/
-    public static final String CONF_FOLDER = "experiments";
+    public static final String CONF_FOLDER = "conf";
 
-    public static final String NETWORK_XML = "networkAll.xml";
-    public static final String FLOWS_XML = "dflows2.xml";
-    public static final String INIT_FLOWS_XML = "initFlowsAll.xml";
+    public static final String NETWORK_XML = "network.xml";
+    public static final String FLOWS_XML = "flows.xml";
+    public static final String INIT_FLOWS_XML = "initFlows.xml";
     public static final String POLICY_XML = "policy.xml";
 
     /*If you ever happened to use magic values..*/
     public static final String MAGIC_NUMBER_VALUE = "-9999";
-
 }
