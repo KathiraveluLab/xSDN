@@ -85,12 +85,14 @@ public class XSDNEngine {
 
                 if (!flow.isCompleted()) {
                     anyIncomplete = true;
-                    if (routingAlgorithm.equalsIgnoreCase("RandomRoute")) {
+                    // Per-flow algorithm override (set via algorithm="..." in flows.xml) takes precedence
+                    String effectiveAlgo = (flow.getAlgorithm() != null) ? flow.getAlgorithm() : routingAlgorithm;
+                    if (effectiveAlgo.equalsIgnoreCase("RandomRoute")) {
                         pt.inesc_id.gsd.ravana.algorithms.RandomRoute.route(flowId);
-                    } else if (routingAlgorithm.equalsIgnoreCase("AdaptiveRoute")) {
+                    } else if (effectiveAlgo.equalsIgnoreCase("AdaptiveRoute")) {
                         pt.inesc_id.gsd.ravana.algorithms.AdaptiveRoute.route(flowId);
                     } else {
-                        logger.warn("Routing algorithm " + routingAlgorithm + " not recognized in execution loop.");
+                        logger.warn("Routing algorithm " + effectiveAlgo + " not recognized in execution loop.");
                     }
                 }
             }

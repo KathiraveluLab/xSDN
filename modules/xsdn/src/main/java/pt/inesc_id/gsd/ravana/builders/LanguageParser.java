@@ -35,10 +35,13 @@ public class LanguageParser {
      * @param chunkArray  array of chunks of the flow.
      */
     public static void buildxSDNFlows(String idVal, double start, String chunks, String origin,
-                                      String destination, String[] chunkArray, String profile) {
+                                      String destination, String[] chunkArray, String profile, String algorithm) {
         // Initialize a XSDN Flow
         xsdnFlow = new XSDNFlow(start, origin, destination);
         xsdnFlow.setProfile(profile);
+        if (algorithm != null && !algorithm.isEmpty()) {
+            xsdnFlow.setAlgorithm(algorithm);
+        }
 
         if (chunkArray.length > 0) {
             isWaitStrictlyOrdered = LanguageUtil.isWaitStrictlyOrdered(chunkArray[0]);

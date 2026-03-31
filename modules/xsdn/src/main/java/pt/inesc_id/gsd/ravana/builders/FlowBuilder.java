@@ -61,7 +61,10 @@ public class FlowBuilder implements Parser {
             if (!(ParseUtil.getFirstElementValue(flow, "chunks").trim().equalsIgnoreCase(""))) {
                 chunkArray = ParseUtil.getFirstElementValueAsStringArray(flow, "chunks");
             }
-            LanguageParser.buildxSDNFlows(idVal, start, chunks, origin, destination, chunkArray, profileVal);
+            Node algorithmAttr = attr.getNamedItem("algorithm");
+            String algorithmVal = algorithmAttr != null ? algorithmAttr.getNodeValue() : null;
+
+            LanguageParser.buildxSDNFlows(idVal, start, chunks, origin, destination, chunkArray, profileVal, algorithmVal);
 
 
         }

@@ -30,7 +30,8 @@ public class XSDNFlow extends Flow {
     private boolean isPartitioned = false;
     private double timeTakenEnroute = 0;
     private String[] designatedRoute;
-    private String profile = "time"; // Default profile
+    private String profile = "time"; // Default SLA profile
+    private String algorithm = null; // Optional per-flow routing algorithm override
 
     public XSDNFlow(double startTime, String origin, String destination) {
         super(startTime, origin, destination);
@@ -172,5 +173,17 @@ public class XSDNFlow extends Flow {
 
     public void setProfile(String profile) {
         this.profile = profile;
+    }
+
+    /**
+     * Returns the per-flow routing algorithm override, or null if the global algorithm should be used.
+     * Set via the {@code algorithm} attribute in flows.xml.
+     */
+    public String getAlgorithm() {
+        return algorithm;
+    }
+
+    public void setAlgorithm(String algorithm) {
+        this.algorithm = algorithm;
     }
 }
