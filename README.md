@@ -65,6 +65,7 @@ xSDN provides the core simulation and adaptive routing engine. For real-world em
 ## Future Work
 
 - **Real-time Web Dashboard**: A lightweight HTML/JS dashboard that polls the `KnowledgeBase` to visualize live network topology and animate flow heatmaps, providing a richer experience than terminal-only output.
+- **Full Topology Distribution**: Fully distributing `RouteInitiator.possibleRoutes` via Infinispan is partially satisfied — `KnowledgeBase` is already distributed. Full topology distribution is left as future work.
 
 
 ## Citing xSDN
