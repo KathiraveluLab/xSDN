@@ -87,7 +87,8 @@ public class Chunk extends XSDNCore implements java.io.Serializable {
     }
 
     public double getProperty(String property) {
-        return propertyValuesForTheChunk.get(property);
+        Double value = propertyValuesForTheChunk.get(property);
+        return value != null ? value : 0.0;
     }
 
     /**

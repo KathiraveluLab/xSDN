@@ -21,6 +21,7 @@ import pt.inesc_id.gsd.ravana.constants.InfinispanConstants;
 public class InfCore {
     private static Logger logger = LogManager.getLogger(InfCore.class.getName());
 
+    private static DefaultCacheManager manager = null;
     private static InfCore infiniCore = null;
     protected static Cache<String, String> defaultCache;
     protected static Cache<String, pt.inesc_id.gsd.ravana.statistics.FlowStatistics> statisticsCache;
@@ -51,7 +52,7 @@ public class InfCore {
      * @throws java.io.IOException, if getting the cache failed.
      */
     protected InfCore() throws IOException {
-        DefaultCacheManager manager = new DefaultCacheManager(InfinispanConstants.INFINISPAN_CONFIG_FILE);
+        manager = new DefaultCacheManager(InfinispanConstants.INFINISPAN_CONFIG_FILE);
         defaultCache = manager.getCache(InfinispanConstants.TRANSACTIONAL_CACHE);
         statisticsCache = manager.getCache("statistics");
         nodesCache = manager.getCache("nodes");
@@ -59,6 +60,17 @@ public class InfCore {
         policiesCache = manager.getCache("policies");
         routesCache = manager.getCache("routes");
         bestRoutesCache = manager.getCache("best_routes");
+    }
+
+    /**
+     * Shuts down the Infinispan cache manager, releasing cluster threads so the JVM can exit.
+     */
+    public static void stop() {
+        if (manager != null) {
+            manager.stop();
+            manager = null;
+        }
+        infiniCore = null;
     }
 
     /**

@@ -30,3 +30,4 @@ _bmad
 .cursor
 .vscode
 venv/
+target/
