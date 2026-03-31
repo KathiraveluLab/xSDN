@@ -32,6 +32,11 @@ Respective Executors are found in the package, "main".
 Make sure to include conf/log4j2-test.xml into your class path to be able to configure and view the logs. Default log level is [WARN].
 
 
+## Documentation
+
+- **[Routing Engine Architecture](docs/routing_engine.md)** — How the Infinispan distributed cache connects to `XSDNFlow`, the adaptive routing feedback loop, SLA intent policies, and how to add custom algorithms.
+
+
 ## OpenDaylight (ODL) Integration
 
 xSDN provides the core simulation and adaptive routing engine. For real-world emulation with OpenDaylight and Mininet, see **[SENDIM](https://github.com/KathiraveluLab/SENDIM)** — a framework built on top of xSDN that bridges the xSDN engine to the OpenDaylight northbound API, enabling fully emulated SDN environments.
