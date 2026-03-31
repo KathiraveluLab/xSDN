@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <policies>
-    <policy profile="time"><priority>1</priority></policy>
-    <!--policy profile="energy"><priority>2</priority></policy-->
+    <policy profile="time"><goal>minimize</goal><property>time</property><priority>1</priority></policy>
+    <policy profile="energy"><goal>minimize</goal><property>energy</property><priority>2</priority></policy>
+    <policy profile="bandwidth"><goal>maximize</goal><property>speed</property><priority>3</priority></policy>
 </policies>

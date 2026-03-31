@@ -30,6 +30,7 @@ public class XSDNFlow extends Flow {
     private boolean isPartitioned = false;
     private double timeTakenEnroute = 0;
     private String[] designatedRoute;
+    private String profile = "time"; // Default profile
 
     public XSDNFlow(double startTime, String origin, String destination) {
         super(startTime, origin, destination);
@@ -137,6 +138,9 @@ public class XSDNFlow extends Flow {
                     if (reachTime > totalTime) {
                         totalTime = reachTime;
                     }
+                    // Accumulate SLA properties for the chunk across its assigned route
+                    chunks.get(i).addMultiplicationProperty("energy");
+                    chunks.get(i).addMultiplicationProperty("cost");
                 }
             }
         } else {
@@ -160,5 +164,13 @@ public class XSDNFlow extends Flow {
     public int incrementChunkIdTracking() {
         this.chunkIdTracking++;
         return this.chunkIdTracking;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 }

@@ -95,14 +95,15 @@ public class Chunk extends XSDNCore implements java.io.Serializable {
      * @param property, name of the property
      */
     public void addMultiplicationProperty(String property) {
-        double currentUnitValue = XSDNCore.getProperty(currentNode, nextNode, property);
-        if (!propertyValuesForTheChunk.containsKey(property)) {
-            propertyValuesForTheChunk.put(property, currentUnitValue);
-        } else {
-            double earlyTotalValue = propertyValuesForTheChunk.get(property);
-            double currentValueAddition = currentUnitValue * size;
-            propertyValuesForTheChunk.put(property, (earlyTotalValue+currentValueAddition));
+        if (designatedRoute == null) return;
+        double totalValue = 0;
+        for (int i = 0; i < designatedRoute.length - 1; i++) {
+            String u = designatedRoute[i];
+            String v = designatedRoute[i+1];
+            double unitValue = XSDNCore.getProperty(u, v, property);
+            totalValue += unitValue * size;
         }
+        propertyValuesForTheChunk.put(property, totalValue);
     }
 
     /**

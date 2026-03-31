@@ -18,7 +18,7 @@
   </parent>
 
   <artifactId>xsdn</artifactId>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
   <name>xsdn</name>
 
     <dependencies>

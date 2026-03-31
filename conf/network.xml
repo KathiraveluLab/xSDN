@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <nodes>
     <node id="GSD1">
-            <link id="GSD2"><cost>89</cost><speed>49</speed></link>
-            <link id="GSD5"><cost>4</cost><speed>43</speed></link>
+            <link id="GSD2"><cost>89</cost><speed>49</speed><energy>10</energy></link>
+            <link id="GSD5"><cost>4</cost><speed>43</speed><energy>25</energy></link>
     </node>
     <node id="GSD2">
-            <link id="GSD1"><cost>89</cost><speed>49</speed></link>
-            <link id="GSD3"><cost>44</cost><speed>24</speed></link>
-            <link id="GSD4"><cost>14</cost><speed>3</speed></link>
+            <link id="GSD1"><cost>89</cost><speed>49</speed><energy>10</energy></link>
+            <link id="GSD3"><cost>44</cost><speed>24</speed><energy>50</energy></link>
+            <link id="GSD4"><cost>14</cost><speed>3</speed><energy>100</energy></link>
     </node>
     <node id="GSD3">
             <link id="GSD2"><cost>349</cost><speed>59</speed></link>
@@ -17,9 +17,9 @@
             <link id="GSD16"><cost>164</cost><speed>36</speed></link>
     </node>
     <node id="GSD4">
-            <link id="GSD2"><cost>859</cost><speed>459</speed></link>
-            <link id="GSD7"><cost>454</cost><speed>254</speed></link>
-            <link id="GSD8"><cost>1334</cost><speed>31</speed></link>
+            <link id="GSD2"><cost>859</cost><speed>459</speed><energy>5</energy></link>
+            <link id="GSD7"><cost>454</cost><speed>254</speed><energy>15</energy></link>
+            <link id="GSD8"><cost>1334</cost><speed>31</speed><energy>80</energy></link>
     </node>
     <node id="GSD5">
             <link id="GSD3"><cost>9</cost><speed>493</speed></link>

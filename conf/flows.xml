@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <flows>
-    <flow id="F1">
+    <flow id="F1" profile="energy">
         <!--Denotes the starting time, in seconds-->
         <start>0</start>
         <!--Chunks start transmission when the previous chunks are completely transmitted from their origin-->
@@ -8,7 +8,7 @@
         <origin>GSD15</origin>
         <destination>GSD1</destination>
     </flow>
-    <flow id="F2">
+    <flow id="F2" profile="bandwidth">
         <start>100</start>
         <!--Numerals appended with D denote time gaps between the start transmission time of chunks-->
         <chunks>100,30.1D,334,24,203D,3,303D,4334,3, 199, 300</chunks>

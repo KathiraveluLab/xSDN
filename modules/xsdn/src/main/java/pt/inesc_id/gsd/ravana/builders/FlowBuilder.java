@@ -39,6 +39,9 @@ public class FlowBuilder implements Parser {
             Node nodeAttr = attr.getNamedItem("id");
             String idVal = nodeAttr.getNodeValue();
 
+            Node profileAttr = attr.getNamedItem("profile");
+            String profileVal = profileAttr != null ? profileAttr.getNodeValue() : "time";
+
             if (logger.isTraceEnabled()) {
                 logger.trace("---------------------------------\nFlow: " + idVal +
                         "\n---------------------------------");
@@ -58,7 +61,7 @@ public class FlowBuilder implements Parser {
             if (!(ParseUtil.getFirstElementValue(flow, "chunks").trim().equalsIgnoreCase(""))) {
                 chunkArray = ParseUtil.getFirstElementValueAsStringArray(flow, "chunks");
             }
-            LanguageParser.buildxSDNFlows(idVal, start, chunks, origin, destination, chunkArray);
+            LanguageParser.buildxSDNFlows(idVal, start, chunks, origin, destination, chunkArray, profileVal);
 
 
         }

@@ -147,6 +147,7 @@ public class InfRouteInitiator extends XSDNCore {
         defaultCache = infiniCore.getDefaultCache();
         Map<String, List<String>> possibleRoutes = new HashMap<>();
         defaultCache.putAll(possibleRoutes);
+        pt.inesc_id.gsd.ravana.statistics.KnowledgeBase.initInfinispan();
     }
 
     private static void clearInitFlows() {

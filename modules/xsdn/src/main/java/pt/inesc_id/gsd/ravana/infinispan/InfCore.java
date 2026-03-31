@@ -27,13 +27,15 @@ public class InfCore {
 
     protected static Cache<String, pt.inesc_id.gsd.ravana.network.XSDNNode> nodesCache;
     protected static Cache<String, pt.inesc_id.gsd.ravana.flow.XSDNFlow> flowsCache;
-    protected static Cache<String, pt.inesc_id.gsd.ravana.policy.XSDNPolicy> policiesCache;
+    protected static Cache<String, pt.inesc_id.gsd.ravana.intents.XSDNPolicy> policiesCache;
     protected static Cache<java.lang.String, java.util.List<java.lang.String>> routesCache;
+    protected static Cache<String, pt.inesc_id.gsd.ravana.statistics.FlowStatistics> bestRoutesCache;
 
     public Cache<String, pt.inesc_id.gsd.ravana.network.XSDNNode> getNodesCache() { return nodesCache; }
     public Cache<String, pt.inesc_id.gsd.ravana.flow.XSDNFlow> getFlowsCache() { return flowsCache; }
-    public Cache<String, pt.inesc_id.gsd.ravana.policy.XSDNPolicy> getPoliciesCache() { return policiesCache; }
+    public Cache<String, pt.inesc_id.gsd.ravana.intents.XSDNPolicy> getPoliciesCache() { return policiesCache; }
     public Cache<java.lang.String, java.util.List<java.lang.String>> getRoutesCache() { return routesCache; }
+    public Cache<String, pt.inesc_id.gsd.ravana.statistics.FlowStatistics> getBestRoutesCache() { return bestRoutesCache; }
 
     public Cache<String, pt.inesc_id.gsd.ravana.statistics.FlowStatistics> getStatisticsCache() {
         return statisticsCache;
@@ -56,6 +58,7 @@ public class InfCore {
         flowsCache = manager.getCache("flows");
         policiesCache = manager.getCache("policies");
         routesCache = manager.getCache("routes");
+        bestRoutesCache = manager.getCache("best_routes");
     }
 
     /**

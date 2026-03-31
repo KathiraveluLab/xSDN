@@ -15,6 +15,7 @@ public class FlowStatistics implements Serializable {
     private double timeTakenEnroute;
 
     private Map<String, Double> properties = new HashMap<>();
+    private Map<String, String> stringProperties = new HashMap<>();
 
     public FlowStatistics(String flowId, String origin, String destination, double timeTakenEnroute) {
         this.flowId = flowId;
@@ -47,7 +48,19 @@ public class FlowStatistics implements Serializable {
         return properties.getOrDefault(propertyName, 0.0);
     }
 
+    public void addStringProperty(String propertyName, String value) {
+        stringProperties.put(propertyName, value);
+    }
+
+    public String getStringProperty(String propertyName) {
+        return stringProperties.getOrDefault(propertyName, "");
+    }
+
     public Map<String, Double> getProperties() {
         return properties;
+    }
+
+    public Map<String, String> getStringProperties() {
+        return stringProperties;
     }
 }

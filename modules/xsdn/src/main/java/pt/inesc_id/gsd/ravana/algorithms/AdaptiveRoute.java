@@ -21,57 +21,90 @@ public class AdaptiveRoute extends RouteInitiator {
      * @param flowId, id of the flow.
      */
     public static void route(String flowId) {
-        String origin = xSDNFlows.get(flowId).getOrigin();
-        String destination = xSDNFlows.get(flowId).getDestination();
+        pt.inesc_id.gsd.ravana.flow.XSDNFlow flow = xSDNFlows.get(flowId);
+        String origin = flow.getOrigin();
+        String destination = flow.getDestination();
         String key = getKey(flowId);
         List<String> routes = possibleRoutes.get(key);
 
-        String bestRouteStr = null;
-        double bestTime = Double.MAX_VALUE;
+        // SLA Intent Analysis
+        String profile = flow.getProfile();
+        pt.inesc_id.gsd.ravana.intents.XSDNPolicy policy = xSDNPolicies.get(profile);
+        String propertyToOptimize = "time";
+        boolean isMinimize = true;
 
-        // Query KnowledgeBase for historical routes matching this origin and destination
-        Map<String, FlowStatistics> kb = XSDNCore.getKnowledgeBase();
-        for (FlowStatistics stats : kb.values()) {
-            if (stats.getOrigin().equals(origin) && stats.getDestination().equals(destination)) {
-                if (stats.getTimeTakenEnroute() < bestTime) {
-                    bestTime = stats.getTimeTakenEnroute();
-                    bestRouteStr = stats.getProperty("route");
-                }
+        if (policy != null) {
+            Map<String, String> policyMap = policy.getPolicyMap();
+            if (policyMap.containsKey("property")) {
+                propertyToOptimize = policyMap.get("property");
+            }
+            if (policyMap.containsKey("goal")) {
+                isMinimize = policyMap.get("goal").equalsIgnoreCase("minimize");
             }
         }
 
-        String route;
-        if (bestRouteStr != null && !bestRouteStr.isEmpty()) {
-            route = bestRouteStr;
-            if (logger.isInfoEnabled()) {
-                logger.info("AdaptiveRoute: Found historical best route for flow " + flowId + " (" + origin + "=>" + destination + ") with time " + bestTime + ". Route: " + route);
+        String chosenRoute = "";
+        for (pt.inesc_id.gsd.ravana.flow.Chunk chunk : flow.getChunks().values()) {
+            String bestRouteStr = null;
+
+            // Fetch SLA-aware historical best route per chunk
+            FlowStatistics bestStat = pt.inesc_id.gsd.ravana.statistics.KnowledgeBase.getBestHistoricalRoute(
+                    origin, destination, propertyToOptimize, isMinimize);
+
+            if (bestStat != null) {
+                bestRouteStr = bestStat.getStringProperty("route");
             }
-        } else {
-            // Fallback to random route
-            int random = RandomUtil.randomLessThanMax(routes.size() - 1);
-            route = routes.get(random);
-            if (logger.isInfoEnabled()) {
-                logger.info("AdaptiveRoute: No history found. Randomly chosen route for " + flowId + " (" + origin + "=>" + destination + ") is: " + route);
+
+            String route;
+            if (bestRouteStr != null && !bestRouteStr.isEmpty()) {
+                route = bestRouteStr;
+            } else {
+                // Fallback to random route
+                int random = RandomUtil.randomLessThanMax(routes.size() - 1);
+                route = routes.get(random);
             }
+            chosenRoute = route;
+
+            String[] temp = route.isEmpty() ? new String[0] : route.split(" ");
+            int length = temp.length + 2;
+            String[] nodes = new String[length];
+            nodes[0] = origin;
+            System.arraycopy(temp, 0, nodes, 1, temp.length);
+            nodes[length - 1] = destination;
+
+            chunk.setDesignatedRoute(nodes);
+            flow.setDesignatedRouteOnlyToFlow(nodes);
         }
 
-        String[] temp = route.isEmpty() ? new String[0] : route.split(" ");
-        int length = temp.length + 2;
-        String[] nodes = new String[length];
-        nodes[0] = origin;
-        System.arraycopy(temp, 0, nodes, 1, temp.length);
-        nodes[length - 1] = destination;
-
-        xSDNFlows.get(flowId).setDesignatedRoute(nodes);
-        double time = xSDNFlows.get(flowId).startRouting("AdaptiveRoute");
-        xSDNFlows.get(flowId).setCompleted(true);
         if (logger.isInfoEnabled()) {
-            logger.info("Routing completed at time: " + time);
+            logger.info("AdaptiveRoute: Intent-based evaluation (" + propertyToOptimize + ") completed for flow " + flowId + ". Starting routing...");
         }
 
-        // Feedback loop: Record statistics
+        double time = flow.startRouting("AdaptiveRoute");
+        flow.setCompleted(true);
+
+        // Feedback loop: Record comprehensive SLA statistics
         FlowStatistics stats = new FlowStatistics(flowId, origin, destination, time);
-        stats.addProperty("route", route);
-        kb.put(flowId, stats);
+        stats.addStringProperty("route", chosenRoute);
+        stats.addProperty("energy", flow.getTotalProperty("energy"));
+        stats.addProperty("cost", flow.getTotalProperty("cost"));
+        
+        // Record speed as average speed across chunks if needed, 
+        // or just use the speed of the first link of the first chunk as a proxy
+        double totalSpeed = 0;
+        int chunkCount = flow.getChunks().size();
+        for (pt.inesc_id.gsd.ravana.flow.Chunk c : flow.getChunks().values()) {
+            String[] r = c.getDesignatedRoute();
+            if (r != null && r.length > 1) {
+                totalSpeed += XSDNCore.getSpeedOfLink(r[0], r[1]);
+            }
+        }
+        stats.addProperty("speed", chunkCount > 0 ? totalSpeed / chunkCount : 0);
+
+        pt.inesc_id.gsd.ravana.statistics.KnowledgeBase.addFlowStatistics(flowId, stats);
+        
+        if (logger.isInfoEnabled()) {
+            logger.info("Routing completed. Flow " + flowId + " Stats -> Time: " + time + ", Energy: " + stats.getProperty("energy") + ", Goal: " + propertyToOptimize);
+        }
     }
 }
