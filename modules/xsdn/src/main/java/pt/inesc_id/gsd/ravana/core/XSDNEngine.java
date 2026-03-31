@@ -14,7 +14,7 @@ import pt.inesc_id.gsd.ravana.builders.NetworkBuilder;
 import pt.inesc_id.gsd.ravana.builders.Parser;
 import pt.inesc_id.gsd.ravana.builders.PolicyBuilder;
 
-import java.io.File;
+import pt.inesc_id.gsd.ravana.api.RoutingAlgorithmRegistry;
 
 /**
  * Starts xSDN.
@@ -87,12 +87,17 @@ public class XSDNEngine {
                     anyIncomplete = true;
                     // Per-flow algorithm override (set via algorithm="..." in flows.xml) takes precedence
                     String effectiveAlgo = (flow.getAlgorithm() != null) ? flow.getAlgorithm() : routingAlgorithm;
-                    if (effectiveAlgo.equalsIgnoreCase("RandomRoute")) {
+                    // 1. Check northbound registry for researcher-registered custom algorithms
+                    if (RoutingAlgorithmRegistry.contains(effectiveAlgo)) {
+                        RoutingAlgorithmRegistry.get(effectiveAlgo).route(flowId);
+                    // 2. Fall back to built-in algorithms
+                    } else if (effectiveAlgo.equalsIgnoreCase("RandomRoute")) {
                         pt.inesc_id.gsd.ravana.algorithms.RandomRoute.route(flowId);
                     } else if (effectiveAlgo.equalsIgnoreCase("AdaptiveRoute")) {
                         pt.inesc_id.gsd.ravana.algorithms.AdaptiveRoute.route(flowId);
                     } else {
-                        logger.warn("Routing algorithm " + effectiveAlgo + " not recognized in execution loop.");
+                        logger.warn("Routing algorithm '" + effectiveAlgo
+                                + "' not found in registry or built-ins. Register it via RoutingAlgorithmRegistry.register().");
                     }
                 }
             }
