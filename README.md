@@ -33,6 +33,19 @@ mvn exec:java -pl modules/xsdn -Dexec.mainClass="pt.inesc_id.gsd.ravana.main.XSD
     -Dalgo=AdaptiveRoute -Dconf=conf/benchmarking -Dhealth=true
 ```
 
+### Custom Simulations
+You can run xSDN with your own network topology and flow definitions. 
+1. **Use the Tutorial template**: We provide a `tutorial/` folder with sample XML files. You can modify these directly or copy them to a new directory (e.g., `my_sim`).
+2. **Mandatory Files**: Ensure your directory contains:
+   - `network.xml`: Defines nodes and links.
+   - `flows.xml`: Defines traffic flows between nodes.
+   - `policy.xml`: Defines SLA and routing policies.
+3. **Run the simulation**:
+```bash
+mvn exec:java -pl modules/xsdn -Dexec.mainClass="pt.inesc_id.gsd.ravana.main.XSDNExecutor" \
+    -Dconf=tutorial
+```
+
 
 ## Logging
 xSDN uses Log4j2 for logging. The configuration is located at `conf/log4j2-test.xml` and is automatically included in the classpath during builds. The default log level is set to `INFO`.

@@ -12,7 +12,7 @@ package pt.inesc_id.gsd.ravana.constants;
  */
 public class XSDNConstants {
     /*"conf" for real configurations. "experiments" for more experiments.*/
-    public static final String CONF_FOLDER = "conf";
+    public static final String CONF_FOLDER = System.getProperty("conf", "conf");
 
     public static final String NETWORK_XML = "network.xml";
     public static final String FLOWS_XML = "flows.xml";

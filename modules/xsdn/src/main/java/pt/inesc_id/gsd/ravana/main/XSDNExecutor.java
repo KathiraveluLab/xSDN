@@ -44,11 +44,6 @@ public class XSDNExecutor {
         logger.info("xSDN starting — algo={}, conf={}, health={}", algo, confDir, healthEnabled);
         System.out.println("[xSDN] algo=" + algo + "  conf=" + confDir + "  health=" + healthEnabled);
 
-        // Override configuration directory if specified
-        if (!confDir.equals(XSDNConstants.CONF_FOLDER)) {
-            System.setProperty("xsdn.conf.dir", confDir);
-        }
-
         // --- Health Monitor ---
         Initiator.setIsHealthMonitoringEnabled(healthEnabled);
         if (healthEnabled) {
