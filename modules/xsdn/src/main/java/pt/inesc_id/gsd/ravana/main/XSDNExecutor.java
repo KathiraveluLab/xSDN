@@ -56,13 +56,17 @@ public class XSDNExecutor {
         }
 
         // --- Initialize network, routes, and flows ---
+        System.out.println("[xSDN] Initializing network and routes...");
         Initiator.initiateRouteList(10);
+        System.out.println("[xSDN] Initializing flows...");
         XSDNEngine.initFlows();
 
         // --- Infinispan optional: activate for distributed mode ---
+        System.out.println("[xSDN] Initializing Infinispan...");
         KnowledgeBase.initInfinispan();
 
         // --- Execute simulation with selected algorithm ---
+        System.out.println("[xSDN] Executing simulations with algorithm: " + algo);
         XSDNEngine.executeSimulations(algo);
 
         XSDNUtil.logTotalExecTime(startTime);

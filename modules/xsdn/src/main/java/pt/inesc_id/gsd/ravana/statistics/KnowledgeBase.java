@@ -20,7 +20,13 @@ public class KnowledgeBase {
             bestRouteStatisticsMap = infiniCore.getBestRoutesCache();
         } catch (Exception e) {
             System.err.println("Could not initialize Infinispan for KnowledgeBase, fallback to local map: " + e.getMessage());
+            reset();
         }
+    }
+
+    public static void reset() {
+        flowStatisticsMap = new HashMap<>();
+        bestRouteStatisticsMap = new HashMap<>();
     }
 
     public static void addFlowStatistics(String flowId, FlowStatistics stats) {

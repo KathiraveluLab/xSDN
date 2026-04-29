@@ -59,6 +59,7 @@ public class RandomRoute extends RouteInitiator {
         nodes[length - 1] = xSDNFlows.get(flowId).getDestination();
         xSDNFlows.get(flowId).setDesignatedRoute(nodes);
         double time = xSDNFlows.get(flowId).startRouting("RandomRoute");
+        xSDNFlows.get(flowId).setCompleted(true);
         logger.info("Routing completed at time: " + time);
     }
 

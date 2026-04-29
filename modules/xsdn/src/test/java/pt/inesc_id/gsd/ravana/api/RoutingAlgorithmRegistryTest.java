@@ -8,6 +8,8 @@ import pt.inesc_id.gsd.ravana.core.XSDNEngine;
 import pt.inesc_id.gsd.ravana.flow.XSDNFlow;
 import pt.inesc_id.gsd.ravana.infinispan.InfCore;
 import pt.inesc_id.gsd.ravana.main.Initiator;
+import pt.inesc_id.gsd.ravana.statistics.KnowledgeBase;
+import pt.inesc_id.gsd.ravana.statistics.FlowStatistics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +29,11 @@ public class RoutingAlgorithmRegistryTest {
 
     @Before
     public void setUp() {
+        KnowledgeBase.reset();
         XSDNCore.getXSDNFlows().clear();
         XSDNCore.getXSDNNodes().clear();
         XSDNCore.getxSDNPolicies().clear();
+        KnowledgeBase.getAllStatistics().clear();
         RoutingAlgorithmRegistry.clear();
     }
 

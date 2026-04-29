@@ -11,8 +11,21 @@
     <jgroups>
         <stack-file name="external-file" path="conf/default-jgroups-udp.xml"/>
     </jgroups>
-    <cache-container default-cache="replicatedCache">
+    <cache-container default-cache="transactional">
         <transport stack="external-file" />
-        <replicated-cache name="replicatedCache"/>
+        <serialization marshaller="org.infinispan.commons.marshall.JavaSerializationMarshaller">
+            <allow-list>
+                <regex>pt\.inesc_id\.gsd\.ravana\..*</regex>
+                <class>java.util.HashMap</class>
+                <class>java.util.ArrayList</class>
+            </allow-list>
+        </serialization>
+        <replicated-cache name="transactional"/>
+        <replicated-cache name="statistics"/>
+        <replicated-cache name="nodes"/>
+        <replicated-cache name="flows"/>
+        <replicated-cache name="policies"/>
+        <replicated-cache name="routes"/>
+        <replicated-cache name="best_routes"/>
     </cache-container>
 </infinispan>

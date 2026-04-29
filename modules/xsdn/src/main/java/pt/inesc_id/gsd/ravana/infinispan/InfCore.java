@@ -52,14 +52,23 @@ public class InfCore {
      * @throws java.io.IOException, if getting the cache failed.
      */
     protected InfCore() throws IOException {
+        System.out.println("[InfCore] Creating DefaultCacheManager...");
         manager = new DefaultCacheManager(InfinispanConstants.INFINISPAN_CONFIG_FILE);
+        System.out.println("[InfCore] Retrieving default cache...");
         defaultCache = manager.getCache(InfinispanConstants.TRANSACTIONAL_CACHE);
-        statisticsCache = manager.getCache("statistics");
-        nodesCache = manager.getCache("nodes");
-        flowsCache = manager.getCache("flows");
-        policiesCache = manager.getCache("policies");
-        routesCache = manager.getCache("routes");
-        bestRoutesCache = manager.getCache("best_routes");
+        System.out.println("[InfCore] Retrieving statistics cache...");
+        statisticsCache = manager.getCache(InfinispanConstants.STATISTICS_CACHE);
+        System.out.println("[InfCore] Retrieving nodes cache...");
+        nodesCache = manager.getCache(InfinispanConstants.NODES_CACHE);
+        System.out.println("[InfCore] Retrieving flows cache...");
+        flowsCache = manager.getCache(InfinispanConstants.FLOWS_CACHE);
+        System.out.println("[InfCore] Retrieving policies cache...");
+        policiesCache = manager.getCache(InfinispanConstants.POLICIES_CACHE);
+        System.out.println("[InfCore] Retrieving routes cache...");
+        routesCache = manager.getCache(InfinispanConstants.ROUTES_CACHE);
+        System.out.println("[InfCore] Retrieving best routes cache...");
+        bestRoutesCache = manager.getCache(InfinispanConstants.BEST_ROUTES_CACHE);
+        System.out.println("[InfCore] Infinispan initialization complete.");
     }
 
     /**

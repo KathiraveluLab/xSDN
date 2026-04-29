@@ -36,6 +36,7 @@ public class ConcurrentKnowledgeBaseTest {
 
     @Before
     public void setUp() {
+        KnowledgeBase.reset();
         XSDNCore.getXSDNFlows().clear();
         XSDNCore.getXSDNNodes().clear();
         XSDNCore.getxSDNPolicies().clear();

@@ -14,5 +14,11 @@ import java.io.File;
  */
 public class InfinispanConstants {
     public static final String INFINISPAN_CONFIG_FILE = XSDNConstants.CONF_FOLDER + File.separator + "infinispan.xml";
-    public static String TRANSACTIONAL_CACHE = "transactional";
+    public static final String TRANSACTIONAL_CACHE = "transactional";
+    public static final String STATISTICS_CACHE = "statistics";
+    public static final String NODES_CACHE = "nodes";
+    public static final String FLOWS_CACHE = "flows";
+    public static final String POLICIES_CACHE = "policies";
+    public static final String ROUTES_CACHE = "routes";
+    public static final String BEST_ROUTES_CACHE = "best_routes";
 }

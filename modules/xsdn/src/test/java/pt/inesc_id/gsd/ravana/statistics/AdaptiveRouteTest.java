@@ -22,6 +22,7 @@ public class AdaptiveRouteTest {
 
     @Before
     public void setUp() {
+        KnowledgeBase.reset();
         // Reset ALL global static state before each test run
         XSDNCore.getXSDNFlows().clear();
         XSDNCore.getXSDNNodes().clear();
