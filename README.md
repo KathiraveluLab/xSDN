@@ -3,27 +3,11 @@
 An Expressive Simulator for Dynamic Network Flows.
 
 
-## Building Using Apache Maven 3.x.x
-To build using maven:
+## Setup and Building
+To automatically build the project and extract the core JAR:
 ```bash
-mvn clean install
-```
-
-You may choose to build, skipping the tests:
-```bash
-mvn clean install -Dmaven.skip.test=true
-```
-
-Alternatively, you may skip executing the tests:
-```bash
-mvn clean install -DskipTests
-```
-
-### Built distribution inside distribution/target.
-```bash
-tar -xzvf distribution/target/xsdn-1.0-SNAPSHOT.tar.gz
-
-mv xsdn-1.0-SNAPSHOT/jars/xsdn-1.0-SNAPSHOT.jar .
+chmod +x setup.sh
+./setup.sh
 ```
 
 ## Executing

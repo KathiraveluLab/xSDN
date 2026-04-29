@@ -24,6 +24,13 @@ public class KnowledgeBase {
         }
     }
 
+    /**
+     * Stop the Infinispan cache manager.
+     */
+    public static void stopInfinispan() {
+        pt.inesc_id.gsd.ravana.infinispan.InfCore.stop();
+    }
+
     public static void reset() {
         flowStatisticsMap = new HashMap<>();
         bestRouteStatisticsMap = new HashMap<>();

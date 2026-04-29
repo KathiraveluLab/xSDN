@@ -79,6 +79,9 @@ public class InfCore {
             manager.stop();
             manager = null;
         }
+        // Explicitly shutdown RxJava schedulers as Infinispan uses RxJava internally
+        // and doesn't always clean up the global schedulers.
+        io.reactivex.rxjava3.schedulers.Schedulers.shutdown();
         infiniCore = null;
     }
 

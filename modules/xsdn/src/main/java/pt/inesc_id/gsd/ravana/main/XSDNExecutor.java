@@ -70,6 +70,9 @@ public class XSDNExecutor {
         XSDNEngine.executeSimulations(algo);
 
         XSDNUtil.logTotalExecTime(startTime);
+
+        // --- Shutdown resources ---
+        KnowledgeBase.stopInfinispan();
     }
 
 }
