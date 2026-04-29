@@ -5,14 +5,16 @@ An Expressive Simulator for Dynamic Network Flows.
 
 ## Building Using Apache Maven 3.x.x
 To build using maven:
+```bash
 mvn clean install
+```
 
-skipping the tests:
+You may choose to build, skipping the tests:
 ```bash
 mvn clean install -Dmaven.skip.test=true
 ```
 
-To skip executing the tests:
+Alternatively, you may skip executing the tests:
 ```bash
 mvn clean install -DskipTests
 ```
