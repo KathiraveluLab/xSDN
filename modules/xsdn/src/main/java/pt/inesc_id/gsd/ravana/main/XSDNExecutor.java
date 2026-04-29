@@ -71,6 +71,9 @@ public class XSDNExecutor {
 
         XSDNUtil.logTotalExecTime(startTime);
 
+        // --- Benchmark Telemetry output ---
+        Initiator.returnHealthMonitoringOutput();
+
         // --- Shutdown resources ---
         KnowledgeBase.stopInfinispan();
     }

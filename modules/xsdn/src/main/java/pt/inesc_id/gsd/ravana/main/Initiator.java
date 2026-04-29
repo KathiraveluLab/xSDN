@@ -102,7 +102,7 @@ public class Initiator {
 
     }
 
-    private static void returnHealthMonitoringOutput() {
+    public static void returnHealthMonitoringOutput() {
         if (isHealthMonitoringEnabled) {
             HealthMonitor.printHealthLogs();
             System.out.println("--- BENCHMARK TELEMETRY ---");

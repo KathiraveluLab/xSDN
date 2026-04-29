@@ -20,6 +20,21 @@
   <artifactId>xsdn</artifactId>
   <packaging>jar</packaging>
   <name>xsdn</name>
+  
+  <build>
+    <resources>
+      <resource>
+        <directory>../../conf</directory>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.properties</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+  </build>
 
     <dependencies>
         <dependency>

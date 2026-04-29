@@ -35,7 +35,7 @@ mvn exec:java -pl modules/xsdn -Dexec.mainClass="pt.inesc_id.gsd.ravana.main.XSD
 
 
 ## Logging
-Make sure to include conf/log4j2-test.xml into your class path to be able to configure and view the logs. Default log level is [WARN].
+xSDN uses Log4j2 for logging. The configuration is located at `conf/log4j2-test.xml` and is automatically included in the classpath during builds. The default log level is set to `INFO`.
 
 
 ## Documentation
